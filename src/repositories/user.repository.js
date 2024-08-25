@@ -1,30 +1,10 @@
-import dbLocal from "db-local";
 import crypto from "crypto";
+import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
-
-const { Schema } = new dbLocal({ path: "./db.json" });
-
-const User = Schema("user", {
-  _id: { type: String, required: true },
-  username: { type: String, required: true },
-  password: { type: String, required: true },
-});
+import jwt from "jsonwebtoken";
 
 export class UserRepository {
   static async create({ username, password }) {
-    console.log(username);
-    if (typeof username !== "string") {
-      throw new Error("El usuario es requerido");
-    }
-    if (typeof password !== "string") {
-      throw new Error("La contraseña es requerida");
-    }
-
-    const existUser = User.findOne({ username });
-    if (existUser) {
-      throw new Error("El usuario ya existe");
-    }
-
     const id = crypto.randomUUID();
     const hashPassword = bcrypt.hashSync(password, 10);
 
@@ -36,27 +16,33 @@ export class UserRepository {
     return newUser;
   }
 
+  static async findUser(username) {
+    const existUser = await User.findOne({ username });
+    return existUser;
+  }
+
+  static async findAll() {
+    return await User.find();
+  }
+
   static async login({ username, password }) {
-    if (typeof username !== "string") {
-      throw new Error("El nombre de usuario es requerido");
-    }
-    if (typeof password !== "string") {
-      throw new Error("La contraseña es requerida");
-    }
+    const user = await User.findOne({ username });
 
-    const user = User.findOne({ username });
     if (!user) {
-      throw new Error("Nombre de usuario o contraseña incorrectos");
+      return { error: "Usuario y/o contraseña incorrecta" };
     }
 
-    const isPasswordValid = bcrypt.compareSync(password, user.password);
-    if (!isPasswordValid) {
-      throw new Error("Nombre de usuario o contraseña incorrectos");
+    const isMatch = bcrypt.compareSync(password, user.password);
+
+    if (!isMatch) {
+      return { error: "Usuario y/o contraseña incorrecta" };
     }
 
-    return {
-      _id: user._id,
-      username: user.username,
-    };
+    const token = jwt.sign(
+      { _id: user._id, username: user.username },
+      "bolivar.2024",
+      { expiresIn: "1h" }
+    );
+    return { user, token };
   }
 }

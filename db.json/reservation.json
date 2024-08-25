@@ -1,1 +1,38 @@
-[{"_id":"c4ff1521-8756-48e6-9810-b2850fc9e2df","name":"Reunión de equipo","place":"Sala de conferencias A","hour":"10:00","date":"2024-08-20","duration":60,"department":"Bolivar Rave"},{"_id":"81d330b1-0035-416d-97b9-cae37f83fdc0","name":"Reunión de equipo","place":"Sala de conferencias A","hour":"10:00","date":"2024-08-20","duration":60,"department":"Bolivar Rave"},{"_id":"740a7c76-3204-437a-a36a-2d0d4593b07c","name":"Reunión de equipo","place":"Sala de conferencias A","hour":"10:00","date":"2024-08-20","duration":120,"department":"Marketing"}]
+[
+  {
+    "_id": "247e6362-a891-4157-953d-4ba655797312",
+    "name": "Reunión de equipo",
+    "place": "Sala de conferencias A",
+    "hour": "10:00",
+    "date": "2024-08-20",
+    "duration": 60,
+    "department": "Biblioteca"
+  },
+  {
+    "_id": "3a4445c2-1115-4037-ab9d-8aaed0bf3d09",
+    "name": "Reunión de equipo",
+    "place": "Sala de conferencias B",
+    "hour": "10:00",
+    "date": "2024-08-20",
+    "duration": 60,
+    "department": "Central"
+  },
+  {
+    "_id": "f9b145b0-1c8c-4fb7-b613-e0bc70774a80",
+    "name": "Reunión de equipo",
+    "place": "Salon 302",
+    "hour": "10:00",
+    "date": "2024-08-20",
+    "duration": 60,
+    "department": "Compras"
+  },
+  {
+    "_id": "4ebd24d0-3cf2-414d-a59e-1d531a884d00",
+    "name": "Reunión de equipo",
+    "place": "Salon 402",
+    "hour": "10:00",
+    "date": "2024-08-20",
+    "duration": 60,
+    "department": "Mantenimiento"
+  }
+]
